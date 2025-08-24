@@ -1,3 +1,4 @@
+import os
 from flask import Flask, send_from_directory
 
 app = Flask(__name__, static_folder='static')
@@ -11,4 +12,5 @@ def static_files(path):
     return send_from_directory('static', path)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 10000))  # Render ожидает PORT
+    app.run(host='0.0.0.0', port=port)
